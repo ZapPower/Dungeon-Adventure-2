@@ -1,0 +1,19 @@
+{
+  "items": {
+    "Basic Health Potion": {
+      "quantity": 5,
+      "pctHealth": 15,
+      "rarity": 1
+    },
+    "Medium Health Potion": {
+      "quantity": 0,
+      "pctHealth": 30,
+      "rarity": 2
+    },
+    "Large Health Potion": {
+      "quantity": 0,
+      "pctHealth": 60,
+      "rarity": 3
+    }
+  }
+}

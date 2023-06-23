@@ -1,0 +1,30 @@
+{
+    "Punch": {
+        "dmgMult": 1.0,
+        "effect": {
+
+        },
+        "lvl": 0,
+        "stm": 0
+    },
+    "Super Punch": {
+        "dmgMult": 1.2,
+        "effect": {
+
+        },
+        "lvl": 2,
+        "stm": 2
+    },
+    "Fireball": {
+        "dmgMult": 3.0,
+        "effect": {
+            "flame": {
+                "proc": 0.3,
+                "duration": 2,
+                "dmgPct": 5
+            }
+        },
+        "lvl": 5,
+        "stm": 5
+    }
+}
