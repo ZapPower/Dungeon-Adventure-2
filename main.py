@@ -14,6 +14,7 @@ dc.disp("World Level -- 1", .1)
 
 p = Player(pName)
 
+# TODO: create armor system WOW :O
 enemy = None
 armor = {
     "Head": ["", None],
@@ -67,19 +68,35 @@ fightActions = ["attack", "item", "run"]
 def checkAction(action):
     if (action not in fightActions):
         dc.disp("That was not a valid action.")
-        checkAction(dc.dispFightMenu().lower())
+        return checkAction(dc.dispFightMenu().lower())
+
+    match action:
+        case "attack":
+            chosen = dc.dispSkills(currSkills)
+            attack(chosen)
 
 
-def checkSkills(action):
-    if (action not in list(currSkills.keys) or action != "back"):
+def attack(action):
+    # TODO: handle string funny action with dict keys (aka how to choose skill)
+    if (action == "back"):
+        return checkAction(dc.dispFightMenu().lower())
+
+    if (action not in list(currSkills.keys)):
         dc.disp("That was not a valid skill.")
         dc.disp("Choose a Skill or enter \"Back\" to return: ", end=False)
-        checkSkills(input())
+        return attack(input())
+
+    global p
+    global enemy
+
+    output = p.attackChr(enemy, currSkills[action])
+    # TODO: continue this ^^^
 
 
 # main game loop
 while True:
     # generate enemy stats (this might be better handled within each enemy file for enemy variety)
+    # TODO: move stat calculations into class file
     enemyAtk = worldLevel * 2
     enemySpd = worldLevel
     enemyDf = (worldLevel+1) * 2
@@ -93,10 +110,6 @@ while True:
     dc.dispFightStats(enemy)
     action = dc.dispFightMenu().lower()
     checkAction(action)
-    match action:
-        case "attack":
-            chosen = dc.dispSkills(currSkills)
-            checkSkills(chosen)
 
     # this should occur AFTER every fight, thus outside of fight loop
     newSkills = updateCurrSkills(p)

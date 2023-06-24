@@ -48,3 +48,15 @@ def dispSkills(currSkills):
         disp(f"{skill}: {currSkills[skill]["stm"]}")
     disp("Choose a Skill or enter \"Back\" to return: ", end=False)
     return input()
+
+
+def effectProcMessage(effectName, enemyName):
+    disp(f"{enemyName} has been inflicted with {effectName}!")
+
+
+def effectRunOutMessage(effectName, enemyName):
+    disp(f"{enemyName} is no longer inflicted with {effectName}.")
+
+
+def effectAppliedMessage(effectName, enemyName, dmg):
+    disp(f"{enemyName} has taken {dmg} damage from {effectName}!")

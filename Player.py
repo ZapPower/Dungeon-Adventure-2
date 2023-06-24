@@ -1,4 +1,5 @@
 import random
+import displayCommands as dc
 
 
 class Player:
@@ -44,17 +45,20 @@ class Player:
     # procs a random effect and gives it to the chosen character
     # returns True if the chosen character is alive
     # returns False if the chosen character is dead
+    # also returns damage dealt
     def attackChr(this, character, skill):
         for effect in skill["effect"]:
             rng = random.randint(1, 100)
             if (skill["effect"][effect]["proc"] < rng):
                 character.setCurrEffect(skill["effect"][effect])
                 character.setCurrEffectName(effect)
+                dc.effectProcMessage(effect, character.name)
 
-        character.setHealth(character.hp - (this.attack * skill["dmgMult"]))
+        dmg = this.attack * skill["dmgMult"]
+        character.setHealth(character.hp - dmg)
         if (character.hp <= 0):
-            return False
-        return True
+            return False, dmg
+        return True, dmg
 
     def setCurrEffect(this, effect):
         this.currEffect = effect
@@ -67,8 +71,11 @@ class Player:
     def applyCurrEffect(this):
         if (this.currEffect == None):
             return
+        if (this.currEffect["duration"] == 0):
+            dc.effectRunOutMessage(this.currEffectName, this.name)
 
         this.currEffect["duration"] -= 1
         dmgTaken = round(this.hp * (this.currEffect["dmgPct"] / 100.0), 1)
         this.hp -= dmgTaken
+        dc.effectAppliedMessage(this.currEffectName, this.name, dmgTaken)
         return dmgTaken

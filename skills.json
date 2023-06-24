@@ -26,5 +26,13 @@
         },
         "lvl": 5,
         "stm": 5
+    },
+    "RAAAAAAAA": {
+        "dmgMult": 10.0,
+        "effect": {
+
+        },
+        "lvl": 0,
+        "stm": 0
     }
 }
