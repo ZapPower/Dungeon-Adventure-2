@@ -73,6 +73,7 @@ class Player:
             return
         if (this.currEffect["duration"] == 0):
             dc.effectRunOutMessage(this.currEffectName, this.name)
+            this.currEffect = None
 
         this.currEffect["duration"] -= 1
         dmgTaken = round(this.hp * (this.currEffect["dmgPct"] / 100.0), 1)

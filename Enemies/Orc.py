@@ -8,3 +8,4 @@ class Orc(Monster):
         this.name = "Orc"
         this.luck = 5
         # TODO: figure out stat configuation so its better
+        # TODO: add monster-specific skills

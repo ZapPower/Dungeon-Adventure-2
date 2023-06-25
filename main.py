@@ -28,7 +28,7 @@ items = json.load(i)
 i.close()
 
 currSkills = {}
-
+# TODO: create floor/room system (could be replacement for world level?)
 worldLevel = 1
 
 # returns a new instance of a monster from the enemies folder
@@ -61,6 +61,7 @@ def updateCurrSkills(player):
     return newSkills
 
 
+# TODO: Add numbering functionality for choosing menu & skill options
 fightActions = ["attack", "item", "run"]
 # small function to handle actions
 
@@ -73,24 +74,28 @@ def checkAction(action):
     match action:
         case "attack":
             chosen = dc.dispSkills(currSkills)
-            attack(chosen)
+            if (attack(chosen)):
+                return True
+
+# handles the "attack" action, executing the given attack skill
 
 
 def attack(action):
-    # TODO: handle string funny action with dict keys (aka how to choose skill)
     if (action == "back"):
         return checkAction(dc.dispFightMenu().lower())
 
-    if (action not in list(currSkills.keys)):
+    skillChoices = [skill.lower() for skill in list(currSkills.keys)]
+    if (action not in skillChoices):
         dc.disp("That was not a valid skill.")
         dc.disp("Choose a Skill or enter \"Back\" to return: ", end=False)
-        return attack(input())
+        return attack(input().lower())
 
     global p
     global enemy
 
     output = p.attackChr(enemy, currSkills[action])
-    # TODO: continue this ^^^
+    dc.disp(f"{enemy.name} has taken {output[1]} damage!")
+    return output[0]
 
 
 # main game loop
@@ -109,7 +114,8 @@ while True:
     dc.dispFightStats(p)
     dc.dispFightStats(enemy)
     action = dc.dispFightMenu().lower()
-    checkAction(action)
+    # TODO: create monster encounter loop
+    checkAction(action)  # IF THIS RETURNS TRUE THEN MONSTER IS DEAD***
 
     # this should occur AFTER every fight, thus outside of fight loop
     newSkills = updateCurrSkills(p)
