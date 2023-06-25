@@ -45,7 +45,7 @@ def dispSkills(currSkills):
     print("")
     disp("Skills:")
     for skill in currSkills:
-        disp(f"{skill}: {currSkills[skill]["stm"]}")
+        disp(f"{skill}: {currSkills[skill]['stm']}")
     disp("Choose a Skill or enter \"Back\" to return: ", end=False)
     return input()
 
