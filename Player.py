@@ -48,8 +48,8 @@ class Player:
     # also returns damage dealt
     def attackChr(this, character, skill):
         for effect in skill["effect"]:
-            rng = random.randint(1, 100)
-            if (skill["effect"][effect]["proc"] < rng):
+            rng = float(random.randint(1, 100))
+            if (skill["effect"][effect]["proc"] < rng / 100):
                 character.setCurrEffect(skill["effect"][effect])
                 character.setCurrEffectName(effect)
                 dc.effectProcMessage(effect, character.name)
