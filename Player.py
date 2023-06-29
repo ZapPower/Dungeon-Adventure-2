@@ -78,5 +78,8 @@ class Player:
         this.currEffect["duration"] -= 1
         dmgTaken = round(this.hp * (this.currEffect["dmgPct"] / 100.0), 1)
         this.hp -= dmgTaken
-        dc.effectAppliedMessage(this.currEffectName, this.name, dmgTaken)
+        if (dmgTaken > 0):
+            dc.effectAppliedMessage(this.currEffectName, this.name, dmgTaken)
+        else:
+            dc.ccEffectAppliedMessage(this.currEffectName, this.name)
         return dmgTaken
