@@ -4,7 +4,7 @@ import time
 # can pass a speed and whether or not the string will end with a newline
 
 
-def disp(string, speed=0.05, end=True):
+def disp(string: str, speed=0.05, end=True):
     for letter in string:
         print(letter, end="", flush=True)
         time.sleep(speed)

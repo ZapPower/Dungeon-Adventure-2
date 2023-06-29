@@ -10,7 +10,7 @@ dc.disp("Welcome to Dungeon Adventure 2")
 dc.disp("What is your name?: ", .04, False)
 pName = input()
 print("")
-dc.disp("World Level -- 1", .1)
+dc.disp("World Level -- 1", .15)
 
 p = Player(pName)
 
