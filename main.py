@@ -36,7 +36,7 @@ worldLevel = 1
 
 def chooseMonster(atk, spd, df, wl):
     enemies = os.listdir('Enemies')
-    enemyInd = random.randint(0, len(enemies) - 2)
+    enemyInd = random.randint(0, len(enemies) - 3)
     if (enemies[enemyInd] == "Orc.py"):
         return Orc(atk, spd, df, wl)
 
