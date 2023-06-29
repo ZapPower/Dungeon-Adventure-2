@@ -61,5 +61,6 @@ def effectRunOutMessage(effectName, enemyName):
 def effectAppliedMessage(effectName, enemyName, dmg):
     disp(f"{enemyName} has taken {dmg} damage from {effectName}!")
 
+
 def ccEffectAppliedMessage(effectName, enemyName):
     disp(f"{enemyName} is currently affected by {effectName}!")

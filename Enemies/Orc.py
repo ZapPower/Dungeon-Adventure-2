@@ -12,18 +12,15 @@ class Orc(Monster):
         s = open("OrcSkills.json")
         this.skills = json.load(s)
         s.close()
-        
-        
+
         # TODO: figure out stat configuation so its better
-        
+
     def attackChr(this, character):
-        #TODO: Complete the attackChr function for Orc
-        
+        # TODO: Complete the attackChr function for Orc
+
         # choose skill to use (for now it wil be based on stamina)
         for skill in this.skills:
             pass
-
-
 
         if (character.hp <= 0):
             return False

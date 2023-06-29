@@ -2,6 +2,7 @@ import displayCommands as dc
 
 # NOTE: ALL SUBCLASSES MUST HAVE "attackChr" METHOD
 
+
 class Monster:
     def __init__(this, attack, speed, defense, worldLvl, maxHp):
         this.attack = attack
