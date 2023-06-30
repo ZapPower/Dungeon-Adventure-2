@@ -7,21 +7,17 @@ import time
 import json
 
 dc.disp("Welcome to Dungeon Adventure 2")
-dc.disp("What is your name?: ", .04, False)
+dc.disp("What is your name?: ", end=False)
 pName = input()
 print("")
-dc.disp("World Level -- 1", .15)
+dc.disp("World Level -- 1", 0.15)
 
 p = Player(pName)
 
-# TODO: create armor system WOW :O
+# TODO: create armor system WOW :O (move armor info into Player class)
+
 enemy = None
-armor = {
-    "Head": ["", None],
-    "Chest": ["", None],
-    "Leg": ["", None],
-    "Boot": ["", None]
-}
+armor = {"Head": ["", None], "Chest": ["", None], "Leg": ["", None], "Boot": ["", None]}
 
 i = open("items.json")
 items = json.load(i)
@@ -35,10 +31,12 @@ worldLevel = 1
 
 
 def chooseMonster(atk, spd, df, wl):
-    enemies = os.listdir('Enemies')
+    enemies = os.listdir("Enemies")
+    # NOTE: below line is untested
     enemyInd = random.randint(0, len(enemies) - 3)
-    if (enemies[enemyInd] == "Orc.py"):
+    if enemies[enemyInd] == "Orc.py":
         return Orc(atk, spd, df, wl)
+
 
 # updates the player's skills based on skills.json
 
@@ -51,10 +49,10 @@ def updateCurrSkills(player):
     global currSkills
     newSkills = []
     for skill in allSkills:
-        if (currSkills.has_key(skill)):
+        if currSkills.has_key(skill):
             continue
 
-        if (allSkills[skill]["lvl"] <= player.lvl):
+        if allSkills[skill]["lvl"] <= player.lvl:
             newSkills.append(skill)
             currSkills[skill] = allSkills[skill]
 
@@ -67,27 +65,28 @@ fightActions = ["attack", "item", "run"]
 
 
 def checkAction(action):
-    if (action not in fightActions):
+    if action not in fightActions:
         dc.disp("That was not a valid action.")
         return checkAction(dc.dispFightMenu().lower())
 
     match action:
         case "attack":
             chosen = dc.dispSkills(currSkills)
-            if (attack(chosen)):
+            if attack(chosen):
                 return True
+
 
 # handles the "attack" action, executing the given attack skill
 
 
 def attack(action):
-    if (action == "back"):
+    if action == "back":
         return checkAction(dc.dispFightMenu().lower())
 
     skillChoices = [skill.lower() for skill in list(currSkills.keys)]
-    if (action not in skillChoices):
+    if action not in skillChoices:
         dc.disp("That was not a valid skill.")
-        dc.disp("Choose a Skill or enter \"Back\" to return: ", end=False)
+        dc.disp('Choose a Skill or enter "Back" to return: ', end=False)
         return attack(input().lower())
 
     global p
@@ -104,7 +103,7 @@ while True:
     # TODO: move stat calculations into class file
     enemyAtk = worldLevel * 2
     enemySpd = worldLevel
-    enemyDf = (worldLevel+1) * 2
+    enemyDf = (worldLevel + 1) * 2
 
     # choose enemy
     enemy = chooseMonster(enemyAtk, enemySpd, enemyDf, worldLevel)
